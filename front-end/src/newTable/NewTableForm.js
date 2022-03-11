@@ -16,12 +16,15 @@ const NewTableForm = ({ loadTables }) => {
   const [formData, setFormData] = useState({ ...defaultFormData });
   const history = useHistory();
 
-  const onChangeHandler = (event) => {
-    setFormData((currentFormData) => {
-      return {
-        ...currentFormData,
-        [event.target.name]: event.target.value,
-      };
+
+  const onChangeHandler = ({ target }) => {
+    let value = target.value;
+    if (target.name === "capacity") {
+      value = Number(value);
+    }
+    setFormData({
+      ...formData,
+      [target.name]: value,
     });
   };
 
