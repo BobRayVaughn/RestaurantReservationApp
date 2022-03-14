@@ -55,7 +55,7 @@ const SeatReservationForm = ({
 
     const table = tables.find((table) => table.table_id === Number(tableId));
 
-    // check if the reservation party exceeds the capacity of the table
+
     if (reservation.people > table.capacity) {
       errors.push({
         message: "Party size exceeds table capacity.",
@@ -64,7 +64,7 @@ const SeatReservationForm = ({
       isValid = false;
     }
 
-    // check if the table is already occupied
+
     if (table.reservation_id) {
       errors.push({
         message: "Table is already occupied.",

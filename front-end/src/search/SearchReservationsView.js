@@ -35,7 +35,6 @@ const SearchReservationsView = () => {
   return (
     <>
       <h2 className="mt-3 mb-5">Search</h2>
-      {/* Render the form for searching by mobile number */}
       <form onSubmit={onSubmitHandler}>
         <div className="input-group">
           <input
@@ -55,7 +54,7 @@ const SearchReservationsView = () => {
 
       <hr style={{ borderTop: "1px solid black" }} className="mt-5" />
 
-      {/* Render the results of the search */}
+     
       <h5 className="my-3">Search Results</h5>
       <ErrorAlert error={error} />
       <ReservationsTable reservations={matchedReservations} />

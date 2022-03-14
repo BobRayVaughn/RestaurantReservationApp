@@ -5,12 +5,7 @@ import { next, previous, today } from "../utils/date-time";
 import ReservationsTable from "./ReservationsTable";
 import RestaurantTablesTable from "./RestaurantTablesTable";
 
-/**
- * Defines the dashboard page.
- * @param date
- *  the date for which the user wants to view reservations.
- * @returns {JSX.Element}
- */
+
 function Dashboard({
   reservations,
   tables,

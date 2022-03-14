@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import { Redirect, Route, Switch, useLocation } from "react-router-dom";
 import Dashboard from "../dashboard/Dashboard";
 import NotFound from "./NotFound";
@@ -10,27 +9,21 @@ import SeatReservationForm from "../seatReservation/SeatReservationForm";
 import { listReservations, listTables } from "../utils/api";
 import SearchReservationsView from "../search/SearchReservationsView";
 
-/**
- * Defines all the routes for the application.
- *
- * You will need to make changes to this file.
- *
- * @returns {JSX.Element}
- */
+
 function Routes() {
   const urlDate = new URLSearchParams(useLocation().search).get("date");
   const date = urlDate || today();
 
-  // State variable for the reservations
+
   const [reservations, setReservations] = useState([]);
 
-  // For setting an error if fetching the reservations goes wrong.
+ 
   const [reservationsError, setReservationsError] = useState(null);
 
-  // State variable for the tables
+
   const [tables, setTables] = useState([]);
 
-  // For setting an error if fetching the tables goes wrong.
+
   const [tablesError, setTablesError] = useState(null);
 
   useEffect(loadReservations, [date]);

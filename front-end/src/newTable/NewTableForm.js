@@ -46,7 +46,7 @@ const NewTableForm = ({ loadTables }) => {
     const errors = [];
     let isValid = true;
 
-    // check if table name was provided
+  
     if (formData.table_name === "") {
       errors.push({
         message: "Table Name cannot be left empty.",
@@ -54,7 +54,7 @@ const NewTableForm = ({ loadTables }) => {
       isValid = false;
     }
 
-    // check if table name is atleast 2 characters long
+ 
     if (formData.table_name.length < 2) {
       errors.push({
         message: "Table Name must be atleast 2 characters long.",
@@ -62,20 +62,20 @@ const NewTableForm = ({ loadTables }) => {
       isValid = false;
     }
 
-    // check if capacity was provided
+ 
     if (formData.capacity === "") {
       errors.push({
         message: "Capacity must not be left empty.",
       });
       isValid = false;
     } else if (isNaN(formData.capacity)) {
-      // check if capacity is a number
+
       errors.push({
         message: "Capacity must be a number.",
       });
       isValid = false;
     } else {
-      // check if capacity is atleast 1
+
       if (Number(formData.capacity) < 1) {
         errors.push({
           message: "Capacity must be atleast 1.",
