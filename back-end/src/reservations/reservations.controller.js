@@ -2,7 +2,6 @@ const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 const resService = require("./reservations.service");
 const hasProperties = require("../errors/hasProperties");
 
-//valid data
 const VALID_PROPERTIES = [
   "first_name",
   "last_name",
@@ -16,7 +15,7 @@ const VALID_PROPERTIES = [
   "updated_at",
 ];
 
-//function for valid properties
+
 function hasOnlyValidProperties(req, res, next) {
     const { data = {} } = req.body;
   
@@ -39,7 +38,7 @@ const isMissing = hasProperties(
   "people"
 );
 
-//LIST
+
 async function list(req, res) {
   const { date, mobile_number } = req.query;
 
@@ -52,20 +51,19 @@ async function list(req, res) {
   }
 }
 
-//CREATE
+
 async function create(req, res) {
   const newReservation = await resService.create(req.body.data);
   res.status(201).json({ data: newReservation });
 }
 
-//READ
+
 async function read(req, res) {
   const { reservation } = res.locals;
   res.json({ data: reservation });
 }
 
-//UPDATE
-// UPDATE STATUS
+
 async function updateStatus(req, res) {
   const { reservation_id } = res.locals.reservation;
   const { status } = req.body.data;
@@ -74,7 +72,6 @@ async function updateStatus(req, res) {
 }
 
 
-// UPDATE
 async function update(req, res) {
   const { reservation_id } = res.locals.reservation;
 
@@ -86,7 +83,7 @@ async function update(req, res) {
   res.json({ data });
 }
 
-//RESERVATION EXISTS
+
 async function reservationExists(req, res, next) {
   const { reservationId } = req.params;
   const foundReservation = await resService.read(reservationId);
@@ -96,12 +93,12 @@ async function reservationExists(req, res, next) {
   } else {
     return next({
       status: 404,
-      message: `Oops! ${reservationId} doesn't exist!`,
+      message: `${reservationId} does not exist.`,
     });
   }
 }
 
-//is valid
+
 function isValid(req, res, next) {
   const { reservation_date, reservation_time, people } = req.body.data;
   let today = new Date();
@@ -115,20 +112,20 @@ console.log(reservation_time)
   if (reservation_time.match(timeFormat) === null) {
     return next({
       status: 400,
-      message: `Oops! Your reservation_time is not a valid time.`,
+      message: `The reservation_time is not valid.`,
     });
   }
 
   if (!reservation_date.match(dateReg)) {
     return next({
       status: 400,
-      message: `Oops! Your reservation_date is not a valid date.`,
+      message: `The reservation_date is not valid.`,
     });
   }
   if (resAsDate.getDay() === 2) {
     return next({
       status: 400,
-      message: `Sorry! We're closed on Tuesdays.`,
+      message: `The Restaurant is closed on Tuesdays.`,
     });
   }
   if (resAsDate < today) {
@@ -176,11 +173,11 @@ function validateFinish(req, res, next) {
   next();
 }
 
-//VALIDATE STATUS OF RESERVATION
+
 function reservationStatus(req, res, next) {
   const { status } = req.body.data;
   const validStatus = ["booked", "seated", "finished", "cancelled"];
-  //if status doesn't include these options return 400
+
   if (!validStatus.includes(status)) {
     return next({
       status: 400,
@@ -205,14 +202,14 @@ module.exports = {
   update: [
     asyncErrorBoundary(reservationExists),
     isMissing,
-    // checkBooked,
+    
     isValid,
     asyncErrorBoundary(update),
   ],
   updateStatus: [
     asyncErrorBoundary(reservationExists),
     asyncErrorBoundary(reservationStatus),
-    // reservationStatus,
+    
     validateFinish,
     asyncErrorBoundary(updateStatus),
   ],

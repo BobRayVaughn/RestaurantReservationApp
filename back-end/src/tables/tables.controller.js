@@ -3,19 +3,19 @@ const tablesService = require("./tables.service");
 const resService = require("../reservations/reservations.service");
 const hasProperties = require("../errors/hasProperties");
 
-//LIST
+
 async function list(req, res) {
   const data = await tablesService.list();
   res.json({ data });
 }
 
-//CREATE
+
 async function create(req, res, next) {
   const data = await tablesService.create(req.body.data);
   res.status(201).json({ data });
 }
 
-//UPDATE
+
 async function update(req, res) {
   const { reservation_id } = req.body.data;
   const table_id = Number(req.params.table_id);
@@ -23,7 +23,7 @@ async function update(req, res) {
   res.json({ data });
 }
 
-//DESTROY
+
 async function destroy(req, res) {
   const { table_id } = req.params;
   const { table } = res.locals;
@@ -39,7 +39,7 @@ function hasOnlyValidProperties(req, res, next) {
     (field) => !VALID_PROPERTIES.includes(field)
   );
 
-  // if there are any invalid fields
+
   if (invalidFields.length) {
     return next({
       status: 400,
@@ -49,8 +49,7 @@ function hasOnlyValidProperties(req, res, next) {
   next();
 }
 
-//VALIDATION
-//Table exists validator
+
 async function tableExists(req, res, next) {
   const { table_id } = req.params;
   const table = await tablesService.read(table_id);
@@ -61,18 +60,18 @@ async function tableExists(req, res, next) {
   } else {
     return next({
       status: 404,
-      message: `${table_id} not found :/`,
+      message: `${table_id} not found.`,
     });
   }
 }
 
-//reservation_id exist
+
 async function reservationExists(req, res, next) {
   const { reservation_id } = req.body.data;
   if (!reservation_id) {
     return next({
       status: 400,
-      message: `Oops! You gotta have a reservation_id`,
+      message: `You have a reservation_id`,
     });
   }
 
@@ -81,7 +80,7 @@ async function reservationExists(req, res, next) {
     res.locals.reservation = reservation;
     return next();
   }
-  next({ status: 404, message: `Oops! ${reservation_id} doesn't exist!` });
+  next({ status: 404, message: `${reservation_id} does not exist.` });
 }
 
 function hasData(req, res, next) {
@@ -91,7 +90,7 @@ function hasData(req, res, next) {
   } else {
     next({
       status: 400,
-      message: `Yikes... Request is missing 'data'.`,
+      message: `Request is missing 'data'.`,
     });
   }
 }
@@ -101,13 +100,13 @@ function isValid(req, res, next) {
       if (!table_name || table_name.length <= 1) {
         return next({
           status: 400,
-          message: "'table_name' length must be at least 2 characters long.. sorry A",
+          message: "'table_name' length must be at least 2 characters long.",
         });
       }
       if (capacity <= 0 || typeof capacity !== "number") {
         return next({
           status: 400,
-          message: "Bad capacity: You cannot book a table for 0 people",
+          message: "capacity error: Cannot book a table for 0 people.",
         });
       }
       next();
@@ -121,25 +120,25 @@ function isValidUpdate(req, res, next) {
     if (occupied) {
       return next({
         status: 400,
-        message: `Table ${res.locals.table.table_id} is currently occupied. Please select another table.`,
+        message: `Table ${res.locals.table.table_id} is currently occupied.`,
       });
     }
     if (status === "seated") {
       return next({
         status: 400,
-        message: `You've already seated these people!!`,
+        message: `Already seated these guests.`,
       });
     }
     if (people > capacity) {
         return next({
           status: 400,
-          message: `Bad capacity: Too many people - not enough seats.`,
+          message: `capacity error: Not enough seats.`,
         });
       }
       next();
 }
 
-//not occupied
+
 function available(req, res, next) {
     const { table } = res.locals;
     if (table.reservation_id === null) {
