@@ -199,7 +199,7 @@ const NewReservationForm = ({ loadReservations, date, refreshReservations }) => 
         </div>
         <div className="form-group row">
           <label htmlFor="reservation_date" className="col-sm-2 col-form-label">
-            Reservation Date
+            Res Date
           </label>
           <div className="col-sm-10">
             <input
@@ -215,7 +215,7 @@ const NewReservationForm = ({ loadReservations, date, refreshReservations }) => 
         </div>
         <div className="form-group row">
           <label htmlFor="reservation_time" className="col-sm-2 col-form-label">
-            Reservation Time
+            Res Time
           </label>
           <div className="col-sm-10">
             <input
@@ -248,7 +248,7 @@ const NewReservationForm = ({ loadReservations, date, refreshReservations }) => 
         </div>
         <div className="form-group row">
           <label htmlFor="mobile_number" className="col-sm-2 col-form-label">
-            Mobile #
+            Phone
           </label>
           <div className="col-sm-10">
             <input

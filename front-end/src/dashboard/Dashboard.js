@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import { next, previous, today } from "../utils/date-time";
 import ReservationsTable from "./ReservationsTable";
 import RestaurantTablesTable from "./RestaurantTablesTable";
-
+import "./Dashboard.css";
 
 function Dashboard({
   reservations,
@@ -22,7 +22,7 @@ function Dashboard({
   };
 
   return (
-    <main>
+    <main className="main">
       <h1>Dashboard</h1>
       <div className="d-md-flex mb-3">
         <h4 className="mb-0">Reservations for {date}</h4>
@@ -45,7 +45,7 @@ function Dashboard({
 
       <hr style={{ borderTop: "1px solid black" }} className="mt-5" />
 
-      {/* Display the tables */}
+      
       <ErrorAlert error={tablesError} />
       <RestaurantTablesTable
         tables={tables}

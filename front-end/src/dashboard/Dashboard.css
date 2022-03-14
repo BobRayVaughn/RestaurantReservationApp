@@ -1,0 +1,45 @@
+.col {
+    background-color: #6c757d;
+}
+
+h1, h2, h4, h5, form {
+    font-family:'Consolas', monospace ;
+}
+
+nav {
+    font-family:'Consolas', monospace ;
+}
+
+table {
+    font-family:'Consolas', monospace ;
+}
+
+.btn-primary {
+    background-color: #8e0dce;
+    border-color: #8e0dce;
+}
+
+.btn-secondary {
+    background-color: #CE8E0D ;
+    border-color: #CE8E0D ;
+}
+
+.col-sm-10 {
+    padding-left: 45px;
+}
+
+.form-control {
+    background-color: #D7D3D9;
+}
+
+.navbar-dark .navbar-brand {
+    color: #8e0dce;
+}
+
+.navbar-dark .navbar-brand:visited {
+    color: #8e0dce;
+}
+
+.navbar-dark .navbar-brand:hover {
+    color: #CE8E0D;
+}
