@@ -69,6 +69,19 @@ table {
 }
 
 .btn-outline-primary {
-    color: #8e0dce;
+    color: #fff;
     border-color: #8e0dce;
+    background-color: #8e0dce;
+}
+
+.btn-outline-primary:focus {
+    color: #fff;
+    border-color: #0DCE8E;
+    background-color: #0DCE8E;
+}
+
+.btn-outline-primary:hover {
+    color: #fff;
+    border-color: #CE8E0D;
+    background-color: #CE8E0D;
 }
