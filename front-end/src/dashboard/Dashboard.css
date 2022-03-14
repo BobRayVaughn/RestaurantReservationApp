@@ -67,3 +67,8 @@ table {
 .navbar-dark .navbar-nav .nav-link:hover {
     color: #CE8E0D;
 }
+
+.btn-outline-primary {
+    color: #8e0dce;
+    border-color: #8e0dce;
+}
