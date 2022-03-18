@@ -6,6 +6,16 @@ h1, h2, h4, h5, form {
     font-family:'Consolas', monospace ;
 }
 
+h1 {
+    background-color: #212529;
+    color: #8e0dce;
+}
+
+h2 {
+    background-color: #212529;
+    color: #8e0dce;
+}
+
 nav {
     font-family:'Consolas', monospace ;
 }
@@ -14,6 +24,30 @@ table {
     font-family:'Consolas', monospace ;
 }
 
+.btn-info {
+    font-family:'Consolas', monospace ;
+    background-color: #8e0dce;
+    border-color: #8e0dce;
+    border-radius: 0.25rem;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border: 1px solid transparent;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.btn-info:focus {
+    background-color: #0DCE8E ;
+    border-color: #0DCE8E ;
+}
+
+.btn-info:hover {
+    background-color: #CE8E0D ;
+    border-color: #CE8E0D ;
+}
 
 .btn-primary {
     background-color: #8e0dce;
@@ -26,6 +60,61 @@ table {
 }
 
 .btn-primary:hover {
+    background-color: #CE8E0D ;
+    border-color: #CE8E0D ;
+}
+
+.btn-danger {
+    background-color: #8e0dce;
+    border-color: #8e0dce;
+}
+
+.btn-danger:focus {
+    background-color: #0DCE8E ;
+    border-color: #0DCE8E ;
+}
+
+.btn-danger:hover {
+    background-color: crimson ;
+    border-color: crimson ;
+}
+
+.btn-info {
+    font-family:'Consolas', monospace ;
+    background-color: #8e0dce;
+    border-color: #8e0dce;
+    border-radius: 0.25rem;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border: 1px solid transparent;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.btn-info:focus {
+    background-color: #0DCE8E ;
+    border-color: #0DCE8E ;
+}
+
+.btn-info:hover {
+    background-color: #CE8E0D ;
+    border-color: #CE8E0D ;
+}
+
+.btn-dark {
+    background-color: #8e0dce;
+    border-color: #8e0dce;
+}
+
+.btn-dark:focus {
+    background-color: #0DCE8E ;
+    border-color: #0DCE8E ;
+}
+
+.btn-dark:hover {
     background-color: #CE8E0D ;
     border-color: #CE8E0D ;
 }
@@ -132,4 +221,17 @@ button:hover {
     font-weight: 400;
     text-align: center;
     vertical-align: middle;
+}
+
+body {
+    text-align: center;
+}
+
+table {
+    background-color: #6c757d;
+    color: black;
+}
+
+.table {
+    color: black;
 }

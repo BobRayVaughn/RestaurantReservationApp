@@ -1,97 +1,54 @@
-import React, { useEffect, useState } from "react";
-import { Redirect, Route, Switch, useLocation } from "react-router-dom";
+import React from "react";
+import { Redirect, Route, Switch } from "react-router-dom";
 import Dashboard from "../dashboard/Dashboard";
+import NewReservation from "../reservations/NewReservation";
+import EditReservation from "../reservations/EditReservation";
+import SeatReservation from "../reservations/SeatReservation"
 import NotFound from "./NotFound";
 import { today } from "../utils/date-time";
-import NewReservationForm from "../newReservation/NewReservationForm";
-import NewTableForm from "../newTable/NewTableForm";
-import SeatReservationForm from "../seatReservation/SeatReservationForm";
-import { listReservations, listTables } from "../utils/api";
-import SearchReservationsView from "../search/SearchReservationsView";
+import useQuery from "../utils/useQuery";
+import NewTable from "../tables/NewTable";
+import Search from "../reservations/Search";
+
+
+/**
+ * Defines all the routes for the application.
+ *
+ * You will need to make changes to this file.
+ *
+ * @returns {JSX.Element}
+ */
 
 
 function Routes() {
-  const urlDate = new URLSearchParams(useLocation().search).get("date");
-  const date = urlDate || today();
+  const date = useQuery().get("date");
 
-
-  const [reservations, setReservations] = useState([]);
-
- 
-  const [reservationsError, setReservationsError] = useState(null);
-
-
-  const [tables, setTables] = useState([]);
-
-
-  const [tablesError, setTablesError] = useState(null);
-
-  useEffect(loadReservations, [date]);
-
-  function loadReservations() {
-    const abortController = new AbortController();
-    setReservationsError(null);
-    listReservations({ date }, abortController.signal)
-      .then(setReservations)
-      .catch(setReservationsError);
-    return () => abortController.abort();
-  }
-
-  function refreshReservations() {
-    setReservationsError(null);
-    return listReservations({ date }).then(setReservations).catch(setReservationsError);
-  }
-
-  useEffect(loadTables, []);
-
-  function loadTables() {
-    const abortController = new AbortController();
-    setTablesError(null);
-    return listTables(abortController.signal).then(setTables).catch(setTablesError);
-  }
 
   return (
     <Switch>
       <Route exact={true} path="/">
         <Redirect to={"/dashboard"} />
       </Route>
-      <Route exact={true} path="/reservations">
+      <Route exact path="/reservations">
         <Redirect to={"/dashboard"} />
       </Route>
-      <Route path="/reservations/:reservation_id/edit">
-        <NewReservationForm
-          loadReservations={loadReservations}
-          date={date}
-          refreshReservations={refreshReservations}
-        />
-      </Route>
-      <Route path="/reservations/:reservation_id/seat">
-        <SeatReservationForm
-          reservations={reservations}
-          tables={tables}
-          loadTables={loadTables}
-          refreshReservations={refreshReservations}
-        />
+      <Route exact path="/dashboard">
+        <Dashboard date={date || today()} />
       </Route>
       <Route path="/reservations/new">
-        <NewReservationForm loadReservations={loadReservations} date={date} />
+        <NewReservation />
+      </Route>
+      <Route path="/reservations/:reservation_id/seat">
+        <SeatReservation />
+      </Route>
+      <Route exact path="/reservations/:reservation_id/edit">
+        <EditReservation />
       </Route>
       <Route path="/tables/new">
-        <NewTableForm loadTables={loadTables} />
+        <NewTable />
       </Route>
-      <Route path="/dashboard">
-        <Dashboard
-          reservations={reservations}
-          tables={tables}
-          reservationsError={reservationsError}
-          tablesError={tablesError}
-          date={date}
-          loadTables={loadTables}
-          refreshReservations={refreshReservations}
-        />
-      </Route>
-      <Route path="/search">
-        <SearchReservationsView />
+      <Route exact path="/search">
+        <Search />
       </Route>
       <Route>
         <NotFound />
