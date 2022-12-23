@@ -1,7 +1,5 @@
 # Capstone: Restaurant Reservation System
 
-[Deployed Application](https://brv-restresapp.herokuapp.com/dashboard)
-
 ## Installation
 
 1. Run npm install to install project dependencies.
